@@ -32,5 +32,6 @@ mv example.env .env
 
 ## Live at
 
-#### [https://mcq-assessment-sunny8080.netlify.app](https://mcq-assessment-sunny8080.netlify.app)
+#### [https://quiz-master-sunny8080.netlify.app](https://quiz-master-sunny8080.netlify.app)
+
 # Quiz-Master-VueJs
