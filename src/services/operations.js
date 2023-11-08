@@ -28,10 +28,9 @@ export const fetchQuestions = async (excelSheetLink) => {
     const ws = wb.Sheets[wb.SheetNames[0]]; // get the first worksheet
     const data = utils.sheet_to_json(ws); // generate objects
 
-
     let n = data[0]['B'];
     let start = data[1]['B']
-    res = data.slice(start + 1, start + n + 1);
+    res = data.slice(start, start + n + 1);
   } catch (error) {
     console.log(error);
     console.log("Error occurred");
