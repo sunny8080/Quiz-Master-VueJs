@@ -34,6 +34,14 @@
           <p class="text-center text-xl mb-4 font-semibold text-yellow-50">
             Stats :
           </p>
+
+          <p class="mb-3">
+            MCQ Assessment :
+            <span class="text-yellow-50">{{
+              testMcqOptions[this.$store.state.mcqInd].title
+            }}</span>
+          </p>
+
           <p>
             Total no of questions :
             <span class="text-yellow-50">{{ ques.length }}</span>
@@ -86,7 +94,14 @@
   </div>
 </template>
 <script>
+import testMcqOptions from "../data/testMcqOptions";
+
 export default {
+  data: () => {
+    return {
+      testMcqOptions: testMcqOptions,
+    };
+  },
   computed: {
     ques() {
       return this.$store.state.ques;

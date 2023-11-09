@@ -12,7 +12,8 @@ const store = createStore({
       currentQue: 0,
       correctAns: 0,
       score: 0,
-      isPassed: false
+      isPassed: false,
+      mcqInd: 0
     }
   },
 
@@ -50,6 +51,9 @@ const store = createStore({
     },
     setIsPassed(state, payload) {
       state.isPassed = payload.value
+    },
+    setMCQInd(state, payload) {
+      state.mcqInd = payload.value
     }
   },
   getters: {

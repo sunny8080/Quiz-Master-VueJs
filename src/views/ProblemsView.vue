@@ -37,8 +37,7 @@ export default {
   methods: {
     async loadQuestions() {
       this.loading = true;
-      const xlsxSheet = process.env.VUE_APP_QUESTION_SHEET_LINK;
-      const res = await fetchQuestions(xlsxSheet);
+      const res = await fetchQuestions.bind(this)();
 
       if (res) {
         this.$store.commit("setQuestions", { value: res });

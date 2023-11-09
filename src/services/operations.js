@@ -1,4 +1,5 @@
 import { read, utils, writeFileXLSX } from 'xlsx'
+import testMcqOptions from '../data/testMcqOptions'
 
 // login user
 export const login = async (empId, name) => {
@@ -9,31 +10,39 @@ export const login = async (empId, name) => {
     user: name,
     token
   }
-  localStorage.setItem('token', token)
+  sessionStorage.setItem('token', token);
+  // localStorage.setItem('token', token)
   return auth;
 }
 
-export const fetchQuestions = async (excelSheetLink) => {
+export const fetchQuestions = async function (excelSheetLink) {
   let res = [];
+  const currentMcq = testMcqOptions[this.$store.state.mcqInd];
+
+  if (!currentMcq) {
+    return res;
+  }
+
   try {
-    // Read excel files which is hosted
-    // Download File
-    const f = await fetch(excelSheetLink);
+    // Download File - Read excel files which is hosted
+    const f = await fetch(currentMcq.link);
     const ab = await f.arrayBuffer();
 
     // Parse file
     const wb = read(ab);
 
     // Generate array of objects from first worksheet
-    const ws = wb.Sheets[wb.SheetNames[0]]; // get the first worksheet
+    const ws = wb.Sheets[wb.SheetNames[currentMcq.sheetNo - 1]]; // get the first worksheet
+
+    // console.log(wb.SheetNames[1]);
     const data = utils.sheet_to_json(ws); // generate objects
 
     let n = data[0]['B'];
     let start = data[1]['B']
     res = data.slice(start, start + n);
   } catch (error) {
-    console.log(error);
     console.log("Error occurred");
+    // console.log(error);
   }
   return res;
 }
@@ -54,5 +63,4 @@ export const saveTestDetails = async () => {
 
   console.log("in saveTest end ________________");
 }
-
 
